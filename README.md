@@ -1,6 +1,6 @@
 # sky fall
 
-A simple 2d game written with the wonderful Ruby2d library
+A simple 2d game written with the wonderful Ruby2d library (STILL IN PROGRESS)
 
 ## To Do
 
