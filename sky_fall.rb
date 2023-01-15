@@ -14,6 +14,14 @@ tick = 0
 $enemies = Array.new
 player = Player.new
 
+score_text = Text.new(
+  "Score: #{score}",
+  x: Window.width / 2, y: 15,
+  style: 'bold',
+  size: 20,
+  color: 'white'
+)
+
 on :key do |e|
   if e.type == :held
     # Here we check the bounds of the screen so the player can't trespass them.
@@ -30,26 +38,16 @@ update do
   clear
   player.display
   $enemies << Enemy.new if tick % 5 == 0
-  $enemies.each do |box|
-    box.move
-    box.draw
-    if box.off_screen?
-      $enemies.delete(box)
-    else
-      box.draw
-    end
+  $enemies.each do |enemy|
+    enemy.move
+    enemy.draw
+    enemy.off_screen? ? $enemies.delete(enemy) : enemy.draw
   end
   tick += 1
   if tick % 60 == 0
     score += 1
+    score_text.text = "Score: #{score}"
   end
-  Text.new(
-    "Score: #{score}",
-    x: Window.width / 2, y: 15,
-    style: 'bold',
-    size: 20,
-    color: 'white'
-  )
 end
 
 show
